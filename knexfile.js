@@ -10,7 +10,7 @@ module.exports = {
     },
     pool:{
       afterCreate:(conn,done)=>{
-        coon.run('PRAGMA foreign_keys=ON',done)
+        conn.run('PRAGMA foreign_keys=ON',done)
       }
     }
   },
