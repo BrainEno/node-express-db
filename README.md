@@ -7,4 +7,5 @@
 7.到 knexfile.js 中设置 production 模式下的配置  
 8.heroku 通过 package.json 中的"start" script 来启动服务器  
 9.从 git deploy 到 heroku,选择 auto change 模式，成功后到 setting————Reveal Config Vars  
-10.yarn add pg,修改 knexfile 中的 production 模式
+10.yarn add pg,修改 knexfile 中的 production 模式  
+11.从 cli 登录 heroku,在 heroku-cli 输入 heroku run knex migrate:latest -a node-express-db 12.因为 sqlite 和 postgres 的不同，为了去除 post 的错误，需要修改原 knexfile 中的不适用于 postgres 的 add 方法

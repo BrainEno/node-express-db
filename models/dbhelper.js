@@ -19,9 +19,11 @@ module.exports={
 //add,find,findById,remove,update
 
 async function add(lesson){
-   const [id] = await db('lessons').insert(lesson)
+//下方注释掉的语法适用于sqlite而不适用于postgres的规范,addMessage方法中也是同理
+//    const [id] = await db('lessons').insert(lesson)
+//    return findById(id)
 
-   return findById(id)
+return await db('lessons').insert(lesson,['id','name'])
 }
 
 
@@ -58,10 +60,13 @@ function findMessageById(id){
 }
 
 async function addMessage(message,lesson_id){
-    const [id] = await db('messages')
+    // const [id] = await db('messages')
+    // .where({lesson_id})
+    // .insert(message)
+    // return findMessageById(id)
+    return await db('messages')
     .where({lesson_id})
-    .insert(message)
-    return findMessageById(id)
+    .insert(message,['id'])
  }
 
  function findLessonMessages(lesson_id){
