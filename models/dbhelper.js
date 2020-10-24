@@ -1,7 +1,8 @@
 //where we write our knex queries
-const knex =require('knex')
-const config= require('../knexfile')
-const db = knex(config.development)
+// const knex =require('knex')
+// const config= require('../knexfile')
+// const db = knex(config.development)
+const db= require('../dbConfig');
 
 module.exports={
     add,
@@ -10,7 +11,10 @@ module.exports={
     remove,
     update,
     addMessage,
-    findMessageById
+    findMessageById,
+    findLessonMessages,
+    removeMessage,
+    updateMessage
 }
 //add,find,findById,remove,update
 
@@ -59,3 +63,33 @@ async function addMessage(message,lesson_id){
     .insert(message)
     return findMessageById(id)
  }
+
+ function findLessonMessages(lesson_id){
+     return db('lessons as l')
+     .join("messages as m","l.id","m.lesson_id")
+     .select(
+         "l.id as lessonID",
+         "l.name as lessonName",
+         "m.id as MessageID",
+         "m.sender",
+         "m.text"
+     )
+     .where({lesson_id})
+      
+ }
+
+function removeMessage(id){
+  return db('messages')
+  .where({id})
+  .del()
+}
+
+
+function updateMessage(id,changes){
+    return db('messages')
+    .where({id})
+    .update(changes)
+    .then(()=>{
+        findMessageById(id)
+    })
+}
