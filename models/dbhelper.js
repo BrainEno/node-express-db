@@ -3,6 +3,7 @@
 // const config= require('../knexfile')
 // const db = knex(config.development)
 const db= require('../dbConfig');
+const knexfile = require('../knexfile');
 
 module.exports={
     add,
@@ -14,9 +15,27 @@ module.exports={
     findMessageById,
     findLessonMessages,
     removeMessage,
-    updateMessage
+    updateMessage,
+    addUser,
+    findAllUsers,
+    findUserByUsername
 }
-//add,find,findById,remove,update
+
+async function addUser(user){
+    return await db('users')
+    .insert(user,['id','username'])
+}
+
+function findAllUsers(){
+    return db('users')
+}
+
+function findUserByUsername(username){
+    return db('users')
+    .where({username})
+    .first()
+}
+
 
 async function add(lesson){
 //下方注释掉的语法适用于sqlite而不适用于postgres的规范,addMessage方法中也是同理

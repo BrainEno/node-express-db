@@ -8,4 +8,10 @@
 8.heroku 通过 package.json 中的"start" script 来启动服务器  
 9.从 git deploy 到 heroku,选择 auto change 模式，成功后到 setting————Reveal Config Vars  
 10.yarn add pg,修改 knexfile 中的 production 模式  
-11.从 cli 登录 heroku,在 heroku-cli 输入 heroku run knex migrate:latest -a node-express-db 12.因为 sqlite 和 postgres 的不同，为了去除 post 的错误，需要修改原 knexfile 中的不适用于 postgres 的 add 方法
+11.从 cli 登录 heroku,在 heroku-cli 输入 heroku run knex migrate:latest -a node-express-db 12.因为 sqlite 和 postgres 的不同，为了去除 post 的错误，需要修改原 knexfile 中的不适用于 postgres 的 add 方法  
+12.创建用户 table--knex migrate:make createUsersTable,往 dbhelper 里添加 addUser/findUsers/findUserByUsername 函数,添加 userRoutes 到 server.js  
+13.hash password,yarn add bcryptjs,用 bcrypt.hashSync()来 hash，函数接收两个参数，要 hash 的原始 password 和 hash 轮数，登录验证时用 bcrypt.compareSynch(),接收 req.body.password 和数据库中的 hashedpassword  
+14.设置 cookies 和 sessions,yarn add express-session,在 server.js 中初始化 express-session,并初始化 sessionConfig  
+15.mkdir auth,把 register 和 login 放到 api/auth 路由下面  
+16.在 auth 目录下创建 restricted 中间件，到 server.js 在路由间加入 restricted 中间件  
+17.如果使用 jwt，先注释 server.js 里的 session,sessinonConfig 等
