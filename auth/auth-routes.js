@@ -1,6 +1,7 @@
 const express = require('express')
 const Lessons = require('../models/dbhelper')
 const bcrypt= require('bcryptjs')
+const generateToken=require('./generateToken')
 
 const router=express.Router();
 //for all endpoints beginning with /api/users
@@ -44,14 +45,15 @@ router.post('/login',(req,res)=>{
             //     username:user.username
             // }
 
-           
+            const token=generateToken(user)
 
-            res.status(200).json({message:`Welcome ${user.username}!`})
+            res.status(200).json({message:`Welcome ${user.username}!`,token})
         }else{
             res.status(401).json({message:'Invalid credentials'})
         }
     })
     .catch(error=>{
+        console.log(error)
         res.status(500).json(error)
     })
 })

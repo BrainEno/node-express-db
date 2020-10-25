@@ -4,7 +4,7 @@ const lessonsRouter= require('../Routes/lessons-routes')
 const messagesRouter= require('../Routes/messages-routes')
 const authRouter= require('../auth/auth-routes')
 const usersRouter = require('../Routes/users-routes')
-const restricted= require('../auth/restricted')
+const restricted= require('../auth/restricted-middleware')
 
 const server = express()
 

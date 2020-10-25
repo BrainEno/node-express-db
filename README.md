@@ -14,4 +14,5 @@
 14.设置 cookies 和 sessions,yarn add express-session,在 server.js 中初始化 express-session,并初始化 sessionConfig  
 15.mkdir auth,把 register 和 login 放到 api/auth 路由下面  
 16.在 auth 目录下创建 restricted 中间件，到 server.js 在路由间加入 restricted 中间件  
-17.如果使用 jwt，先注释 server.js 里的 session,sessinonConfig 等
+17.如果使用 jwt，需要注释或删除 server.js 里的 session,sessinonConfig 等
+18.yarn add jsonwebtoken,在 auth 目录下新建 generateToken.js,设置 generateToken 方法，引入 auth-router.js 中的 login 函数中,注释原先的 express session 版本的 restrict 函数，改写为 jwt 版本
