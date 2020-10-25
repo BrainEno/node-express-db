@@ -5,6 +5,7 @@ const router= express.Router();
 
 
 router.get('/',(req,res)=>{
+    console.log('decodedToken', req.decodedToken)
     Lessons.findAllUsers()
     .then(users=>{
         res.status(200).json(users)

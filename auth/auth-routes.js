@@ -58,18 +58,19 @@ router.post('/login',(req,res)=>{
     })
 })
 
-router.get('/logout',(req,res)=>{
-    if(req.session){
-        req.session.destroy(error=>{
-            if (error){
-                res.status(500).json('You check out anytime you like,but you can never leave.')
-            }else{
-                res.status(200).json({message:'Successfully logged out'})
-            }
-        })
-    }else{
-        res.status(200).json({message:'Not logged in'})
-    }
-})
+//-------------------only fits express session way--------------------------------------------------------//
+// router.get('/logout',(req,res)=>{
+//     if(req.session){
+//         req.session.destroy(error=>{
+//             if (error){
+//                 res.status(500).json('You check out anytime you like,but you can never leave.')
+//             }else{
+//                 res.status(200).json({message:'Successfully logged out'})
+//             }
+//         })
+//     }else{
+//         res.status(200).json({message:'Not logged in'})
+//     }
+// })
 
 module.exports=router;

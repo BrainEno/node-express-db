@@ -1,5 +1,8 @@
 const express = require('express')
 // const session= require('express-session')
+const morgan=require('morgan')
+const helmet=require('helmet')
+const cors=require('cors')
 const lessonsRouter= require('../Routes/lessons-routes')
 const messagesRouter= require('../Routes/messages-routes')
 const authRouter= require('../auth/auth-routes')
@@ -19,7 +22,9 @@ const server = express()
 //     resave:false,
 //     saveUninitialized:true, //GDPR laws user has to give consent,在production模式中要由客户端设置为false
 // }
-
+server.use(helmet())
+server.use(morgan('dev'))
+server.use(cors())
 server.use(express.json())
 // server.use(session(sessionConfig))
 
