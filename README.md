@@ -20,19 +20,22 @@
 
 10.yarn add pg,修改 knexfile 中的 production 模式
 
-11.从 cli 登录 heroku,在 heroku-cli 输入 heroku run knex migrate:latest -a node-express-db 12.因为 sqlite 和 postgres 的不同，为了去除 post 的错误，需要修改原 knexfile 中的不适用于 postgres 的 add 方法
+11.从 cli 登录 heroku,在 heroku-cli 输入 heroku run knex migrate:latest -a node-express-db
 
-12.创建用户 table--knex migrate:make createUsersTable,往 dbhelper 里添加 addUser/findUsers/findUserByUsername 函数,添加 userRoutes 到 server.js
+12.因为 sqlite 和 postgres 的不同，为了去除 post 的错误，需要修改原 knexfile 中的不适用于 postgres 的 add 方法
 
-13.hash password,yarn add bcryptjs,用 bcrypt.hashSync()来 hash，函数接收两个参数，要 hash 的原始 password 和 hash 轮数，登录验证时用 bcrypt.compareSynch(),接收 req.body.password 和数据库中的 hashedpassword
+13.创建用户 table--knex migrate:make createUsersTable,往 dbhelper 里添加 addUser/findUsers/findUserByUsername 函数,添加 userRoutes 到 server.js
 
-14.设置 cookies 和 sessions,yarn add express-session,在 server.js 中初始化 express-session,并初始化 sessionConfig  
-15.mkdir auth,把 register 和 login 放到 api/auth 路由下面
+14.hash password,yarn add bcryptjs,用 bcrypt.hashSync()来 hash，函数接收两个参数，要 hash 的原始 password 和 hash 轮数，登录验证时用 bcrypt.compareSynch(),接收 req.body.password 和数据库中的 hashedpassword
 
-16.在 auth 目录下创建 restricted 中间件，到 server.js 在路由间加入 restricted 中间件
+15.设置 cookies 和 sessions,yarn add express-session,在 server.js 中初始化 express-session,并初始化 sessionConfig
 
-17.如果使用 jwt，需要注释或删除 server.js 里的 session,sessinonConfig 等
+16.mkdir auth,把 register 和 login 放到 api/auth 路由下面
 
-18.yarn add jsonwebtoken,在 auth 目录下新建 generateToken.js,设置 generateToken 方法，引入 auth-router.js 中的 login 函数中,注释原先的 express session 版本的 restrict 函数，改写为 jwt 版本
+17.在 auth 目录下创建 restricted 中间件，到 server.js 在路由间加入 restricted 中间件
 
-19.加入有用的第三方中间件，yarn add morgan,morgan 会在每次 request 时在控制台输出日志，便于 debug; yarn add helmet,helmet 会隐藏 header 的相关信息，增加安全性; yarn add cors,解决跨域
+18.如果使用 jwt，需要注释或删除 server.js 里的 session,sessinonConfig 等
+
+19.yarn add jsonwebtoken,在 auth 目录下新建 generateToken.js,设置 generateToken 方法，引入 auth-router.js 中的 login 函数中,注释原先的 express session 版本的 restrict 函数，改写为 jwt 版本
+
+20.加入有用的第三方中间件，yarn add morgan,morgan 会在每次 request 时在控制台输出日志，便于 debug; yarn add helmet,helmet 会隐藏 header 的相关信息，增加安全性; yarn add cors,解决跨域
